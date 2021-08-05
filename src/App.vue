@@ -1,27 +1,42 @@
 <template>
-  <img alt="Vue logo" src="./assets/logo.png" />
-  <HelloWorld msg="Welcome to Your Vue.js + TypeScript App" />
+  <router-view />
 </template>
 
 <script lang="ts">
 import { Options, Vue } from "vue-class-component";
-import HelloWorld from "./components/HelloWorld.vue";
+import Header from "./components/partials/Header.vue";
+import Footer from "./components/partials/Footer.vue";
+import global from "@/global";
+import io from "socket.io-client";
+
+
 
 @Options({
+  provide: {
+    global,
+  },
   components: {
-    HelloWorld,
+    Header,
+    Footer,
   },
 })
+
+/*  setup() {
+    const isActive = ref(false);
+    const id = ref(0);
+    const user = ref("");
+    return [isActive, id, user];
+  },*/
 export default class App extends Vue {}
 </script>
 
-<style>
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
+<style scoped>
+.main {
+  flex: 1;
+}
+.body {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
 }
 </style>
