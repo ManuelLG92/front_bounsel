@@ -71,8 +71,15 @@ export default defineComponent({
   methods: {
     startRecord() {
       global.setIsActive(true);
+      console.log(global.getUserId())
       console.log(global.getIsActive());
-      socketIo = io("http://localhost:3005");
+      socketIo = io("http://localhost:3005", {
+        // query: `foo=${global.getUserId()}`,
+        query: {
+          userId: String(global.getUserId()),
+        },
+      });
+      console.log(global.getUserId());
 
       socketIo.on("connect", () => {
         console.log("SOCKET CONNECTED!", socketIo.id);
@@ -80,6 +87,7 @@ export default defineComponent({
     },
     stopRecord() {
       global.setIsActive(false);
+      console.log(global.getUserId())
       socketIo.disconnect();
     },
   },

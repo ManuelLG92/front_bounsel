@@ -1,8 +1,15 @@
 <template>
   <Layout>
     <template v-slot:content>
-      <div>
-        <h1>Activity</h1>
+      <h1 class="text-center">Activity</h1>
+      <div class="row">
+        <div class="col">
+          <h2>Users</h2>
+        </div>
+        <div class="col">
+          Records
+        </div>
+
       </div>
     </template>
   </Layout>
