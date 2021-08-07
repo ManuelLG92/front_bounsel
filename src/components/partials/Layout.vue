@@ -12,8 +12,6 @@
 import { defineComponent } from "vue";
 import Header from "./Header.vue";
 import Footer from "./Footer.vue";
-import global from "@/global";
-import io from "socket.io-client";
 
 export default defineComponent({
   name: "Layout",

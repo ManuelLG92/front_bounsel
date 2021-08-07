@@ -35,16 +35,16 @@
             <div v-if="!this.global.getIsActive()">
               <!--              <RouterLink :to="{ name: 'login' }">-->
               <button
-                class="btn btn-info ms-3 me-3"
+                class="btn btn-outline-light ms-3 me-3"
                 @click="this.startRecord()"
               >
                 Start Record
               </button>
               <!--              </RouterLink>-->
             </div>
-            <div v-else class="me-5">
+            <div v-else>
               <button
-                class="btn btn-info ms-3 me-3"
+                class="btn btn-outline-light ms-3 me-3"
                 @click="this.stopRecord()"
               >
                 Stop Record
@@ -71,7 +71,7 @@ export default defineComponent({
   methods: {
     startRecord() {
       global.setIsActive(true);
-      console.log(global.getUserId())
+      console.log(global.getUserId());
       console.log(global.getIsActive());
       socketIo = io("http://localhost:3005", {
         // query: `foo=${global.getUserId()}`,
@@ -87,7 +87,7 @@ export default defineComponent({
     },
     stopRecord() {
       global.setIsActive(false);
-      console.log(global.getUserId())
+      console.log(global.getUserId());
       socketIo.disconnect();
     },
   },

@@ -2,7 +2,6 @@ import { createWebHistory, createRouter } from "vue-router";
 import Main from "./components/Main.vue";
 import UsersActivity from "./components/UsersActivity.vue";
 
-
 const routes = [
   {
     path: "/:catchAll(.*)",
