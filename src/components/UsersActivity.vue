@@ -48,7 +48,9 @@
           </div>
           <div class="col-12 mt-3">
             <div class="text-center">
-              <button type="button" class="btn btn-outline-success fw-bold"
+              <button
+                type="button"
+                class="btn btn-outline-success fw-bold"
                 @click="fetchUserConnectionsByDate"
               >
                 Search
@@ -96,28 +98,33 @@
               <span v-if="!showAllConnections">Show all connections</span>
             </button>
             <div v-if="showAllConnections">
-              <div class="row mt-3">
-                <h2 class="text-center">All users connections</h2>
-                <div
-                  class="col-12"
-                  v-for="connection in allConnections"
-                  :key="connection.id"
-                >
-                  <div class="row bg-light p-3 shadow mt-2 mb-2 border">
-                    <div class="col-6 text-center">
-                      User Id: {{ connection.userId }}
-                    </div>
-                    <div class="col-6 text-center mt-1">
-                      Connect At: {{ connection.openAt }}
-                    </div>
-                    <div class="col-6 text-center">
-                      Socket: {{ connection.socketId }}
-                    </div>
-                    <div class="col-6 text-center mt-1">
-                      Disconnect At: : {{ connection.closedAt }}
+              <div v-if="allConnections.length > 1">
+                <div class="row mt-3">
+                  <h2 class="text-center">All users connections</h2>
+                  <div
+                    class="col-12"
+                    v-for="connection in allConnections"
+                    :key="connection.id"
+                  >
+                    <div class="row bg-light p-3 shadow mt-2 mb-2 border">
+                      <div class="col-6 text-center">
+                        User Id: {{ connection.userId }}
+                      </div>
+                      <div class="col-6 text-center mt-1">
+                        Connect At: {{ connection.openAt }}
+                      </div>
+                      <div class="col-6 text-center">
+                        Socket: {{ connection.socketId }}
+                      </div>
+                      <div class="col-6 text-center mt-1">
+                        Disconnect At: : {{ connection.closedAt }}
+                      </div>
                     </div>
                   </div>
                 </div>
+              </div>
+              <div v-else class="mt-3">
+                <h4>There aren't any connections yet.</h4>
               </div>
 
               <p></p>
@@ -150,6 +157,7 @@ export default defineComponent({
       userIdToSearch: 0,
       userConnections: [],
       userConnectionsByDate: [],
+      userConnectionsByDateSearch: false,
       showAllConnections: false,
       allConnections: [],
       from: "",
@@ -174,8 +182,12 @@ export default defineComponent({
       this.allConnections = await response.json();
       console.log(this.allConnections);
     },
-    fetchUserConnectionsByDate() {
-      console.log(this.userIdToSearch, this.from, this.to);
+    async fetchUserConnectionsByDate() {
+      const urlFetchUserConnectionsByDate = `http://localhost:3500/records/user/${this.userIdToSearch}/from/${this.from}/to/${this.to}`;
+      let response = await fetch(urlFetchUserConnectionsByDate);
+      this.userConnectionsByDate = await response.json();
+      console.log(this.userConnectionsByDate);
+      // console.log(this.userIdToSearch, this.from, this.to);
     },
   },
   watch: {

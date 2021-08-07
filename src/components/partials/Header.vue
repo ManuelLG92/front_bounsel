@@ -33,20 +33,23 @@
           </ul>
           <div>
             <div v-if="!this.global.getIsActive()">
-              <!--              <RouterLink :to="{ name: 'login' }">-->
               <button
                 class="btn btn-outline-light ms-3 me-3"
                 @click="this.startRecord()"
               >
                 Start Record
               </button>
-              <!--              </RouterLink>-->
             </div>
             <div v-else>
               <button
                 class="btn btn-outline-light ms-3 me-3"
                 @click="this.stopRecord()"
               >
+                <span
+                  class="spinner-grow spinner-grow-sm text-danger"
+                  role="status"
+                  aria-hidden="true"
+                ></span>
                 Stop Record
               </button>
             </div>
